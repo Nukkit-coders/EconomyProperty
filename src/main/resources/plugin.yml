@@ -1,0 +1,44 @@
+name: EconomyProperty
+version: "1.0.0"
+author: onebone
+api: [1.0.0]
+main: me.onebone.economyproperty.EconomyProperty
+
+commands:
+  property:
+    usage: /property <create|pos1|pos2|make|list|remove>
+    description: Property management command
+    permission: economyproperty.command.property;economyproperty.command.property.pos1;economyproperty.command.property.pos2;economyproperty.command.property.make;economyproperty.command.property.create;economyproperty.command.property.list;economyproperty.command.property.remove;economyproperty.command.property.buy;
+permissions:
+  economyproperty:
+    description: Includes all permissions of EconomyProperty
+    children:
+      economyproperty.command:
+        description: Allows player to use all commands of EconomyProeprty
+        children:
+          econoyproperty.command.property:
+            description: Allows player to use /property
+            children:
+              economyproperty.command.property.create:
+                description: Allows player to use /property create
+              economyproperty.command.property.pos1:
+                description: Allows player to use /property pos1
+              economyproperty.command.property.pos2:
+                description: Allows player to use /property pos2
+              economyproperty.command.property.make:
+                description: Allows player to use /property make
+              economyproperty.command.property.list:
+                description: Allows player to use /property list
+              economyproperty.command.property.remove:
+                description: Allows player to use /property remove
+              economyproperty.command.property.buy:
+                description: Allows player to use /property buy
+                default: true
+      economyproperty.buy:
+        description: Allows player to buy a property
+        default: true
+      economyproperty.admin:
+        description: Admin permissions for EconomyProperty
+        children:
+          economyproperty.admin.modify:
+            description: Allows player to modify property area
