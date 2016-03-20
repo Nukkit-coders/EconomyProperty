@@ -70,6 +70,10 @@ public class YamlProvider implements Provider{
 			Map<Integer, LinkedHashMap<String, Object>> load = ((Map<Integer, LinkedHashMap<String, Object>>)yaml.load(Utils.readFile(file)));
 
 			load.forEach((k, v) -> {
+				if(this.propertyId < k){
+					this.propertyId = k + 1;
+				}
+				
 				if(!tmp.containsKey((String) v.get("level"))){
 					Level level = plugin.getServer().getLevelByName((String) v.get("level"));
 					tmp.put((String) v.get("level"), level);
