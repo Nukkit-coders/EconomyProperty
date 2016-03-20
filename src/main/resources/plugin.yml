@@ -6,9 +6,9 @@ main: me.onebone.economyproperty.EconomyProperty
 
 commands:
   property:
-    usage: /property <create|pos1|pos2|make|list|remove>
+    usage: /property <create|pos1|pos2|make|list|here|remove>
     description: Property management command
-    permission: economyproperty.command.property;economyproperty.command.property.pos1;economyproperty.command.property.pos2;economyproperty.command.property.make;economyproperty.command.property.create;economyproperty.command.property.list;economyproperty.command.property.remove;economyproperty.command.property.buy;
+    permission: economyproperty.command.property;economyproperty.command.property.pos1;economyproperty.command.property.pos2;economyproperty.command.property.make;economyproperty.command.property.create;economyproperty.command.property.list;economyproperty.command.property.remove;economyproperty.command.property.buy;economyproperty.command.property.here;
 permissions:
   economyproperty:
     description: Includes all permissions of EconomyProperty
@@ -31,6 +31,9 @@ permissions:
                 description: Allows player to use /property list
               economyproperty.command.property.remove:
                 description: Allows player to use /property remove
+              economyproperty.command.property.here:
+                description: Allows player to use /property here
+                default: true
               economyproperty.command.property.buy:
                 description: Allows player to use /property buy
                 default: true

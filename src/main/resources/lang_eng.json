@@ -14,6 +14,12 @@
 	"property-available": "You are walking on property #{0}. You can buy here by {M}{1}.",
 	"no-money": "You don't have enough money to buy property #{0}. {M}{1} required.",
 	"bought-property": "You have bought property #{0}.",
+	"property-list-header": "Showing property list ({0}/{1}):",
+	"property-info": "#{0} {1} m^2: {M}{2}",
+	"no-property": "There is no property here.",
+	"provide-number-id": "Please provide property id as number.",
+	"property-removed": "Property #{0} was removed.",
+	"property-not-exist": "Property #{0} does not exist.",
 	
 	"land-maximum": "You have reached maximum amount of lands.",
 	

@@ -343,6 +343,83 @@ public class EconomyProperty extends PluginBase implements Listener{
 						player.sendMessage(this.getMessage("land-maximum"));
 					}
 				}
+			}else if(args[0].equals("list")){
+				if(!sender.hasPermission("economyproperty.command.property.list")){
+					sender.sendMessage(new TranslationContainer(TextFormat.RED + "%commands.generic.permission"));
+					return true;
+				}
+				
+				int page = 1;
+				
+				Map<Integer, Property> properties = this.provider.getAll();
+				int max = (int) Math.ceil(((double) properties.size()) / 5);
+				if(args.length > 1){
+					try{
+						page = Math.min(max, Math.max(1, Integer.parseInt(args[1])));
+					}catch(NumberFormatException e){}
+				}
+				
+				StringBuilder builder = new StringBuilder(this.getMessage("property-list-header", new Object[]{page, max}) + "\n");
+				int i = 1;
+				
+				for(Property property : properties.values()){
+					int current = (int)Math.ceil((double)(i++) / 5);
+					
+					if(current == page){
+						builder.append(this.getMessage("property-info", new Object[]{
+								property.getId(), property.getWidth(), property.getPrice()
+						}) + "\n");
+					}else if(current > page) break;
+				}
+				
+				sender.sendMessage(builder.toString());
+			}else if(args[0].equals("here")){
+				if(!(sender instanceof Player)){
+					sender.sendMessage(new TranslationContainer("commands.generic.ingame"));
+					return true;
+				}
+				
+				Player player = (Player) sender;
+				if(!player.hasPermission("economyproperty.command.property.here")){
+					player.sendMessage(new TranslationContainer(TextFormat.RED + "%commands.generic.permission"));
+					return true;
+				}
+				
+				Property property = this.provider.findProperty(player);
+				if(property != null){
+					sender.sendMessage(this.getMessage("property-info", new Object[]{
+						property.getId(), property.getWidth(), property.getPrice()
+					}));
+					return true;
+				}
+				sender.sendMessage(this.getMessage("no-property"));
+			}else if(args[0].equals("remove")){
+				if(!sender.hasPermission("economyproperty.command.property.remove")){
+					sender.sendMessage(new TranslationContainer(TextFormat.RED + "%commands.generic.permission"));
+					return true;
+				}
+				
+				if(args.length < 2){
+					sender.sendMessage(TextFormat.RED + "Usage: " + command.getUsage());
+					return true;
+				}
+				
+				int id;
+				try{
+					id = Integer.parseInt(args[1]);
+				}catch(NumberFormatException e){
+					sender.sendMessage(this.getMessage("provide-number-id"));
+					return true;
+				}
+				
+				Property property = this.provider.getProperty(id);
+				
+				if(property != null){
+					this.provider.removeProperty(property.getId());
+					sender.sendMessage(this.getMessage("property-removed", new Object[]{property.getId()}));
+				}else{
+					sender.sendMessage(this.getMessage("property-not-exist", new Object[]{id}));
+				}
 			}else{
 				sender.sendMessage(TextFormat.RED + "Usage: " + command.getUsage());
 			}

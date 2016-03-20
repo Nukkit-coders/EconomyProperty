@@ -100,6 +100,10 @@ public class Property{
 		return this.price;
 	}
 	
+	public int getWidth(){
+		return (int) ((Math.abs(Math.floor(end.x) - Math.floor(start.x)) + 1) * (Math.abs(Math.floor(end.y) - Math.floor(start.y)) + 1));
+	}
+	
 	public String getLevelName(){
 		return this.levelName;
 	}
