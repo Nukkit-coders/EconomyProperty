@@ -137,7 +137,8 @@ public class EconomyProperty extends PluginBase implements Listener{
 		this.api = EconomyAPI.getInstance();
 		this.land = (EconomyLand) this.getServer().getPluginManager().getPlugin("EconomyLand");
 		
-		InputStream is = this.getResource("lang_" + this.getConfig().get("langauge", "eng") + ".json");
+		String name = this.getConfig().get("language", "eng");
+		InputStream is = this.getResource("lang_" + name + ".json");
 		if(is == null){
 			this.getLogger().critical("Could not load language file. Changing to default.");
 			
@@ -148,6 +149,19 @@ public class EconomyProperty extends PluginBase implements Listener{
 			lang = new GsonBuilder().create().fromJson(Utils.readFile(is), new TypeToken<LinkedHashMap<String, String>>(){}.getType());
 		}catch(JsonSyntaxException | IOException e){
 			this.getLogger().critical(e.getMessage());
+		}
+		
+		if(!name.equals("eng")){
+			try{
+				LinkedHashMap<String, String> temp = new GsonBuilder().create().fromJson(Utils.readFile(this.getResource("lang_eng.json")), new TypeToken<LinkedHashMap<String, String>>(){}.getType());
+				temp.forEach((k, v) -> {
+					if(!lang.containsKey(k)){
+						lang.put(k, v);
+					}
+				});
+			}catch(IOException e){
+				this.getLogger().critical(e.getMessage());
+			}
 		}
 		
 		this.provider = new YamlProvider(this, new File(this.getDataFolder(), "Property.yml"));
