@@ -5,7 +5,7 @@
 	"pos-not-set": "Positions are not set correctly.",
 	"property-overlap": "You are overlapping with property #{0}.",
 	"land-overlap": "You are trying to buy property which is overlapping with land #{0}.",
-	"provide-number": "Please provide price with price.",
+	"provide-number": "Please provide price with number.",
 	"property-created": "Property #{0} was created.",
 	"exit-creation-mode": "You are no longer creation mode.",
 	"enter-creation-mode": "You are now creation mode.",
