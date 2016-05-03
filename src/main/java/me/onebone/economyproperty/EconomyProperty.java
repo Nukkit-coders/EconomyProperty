@@ -33,7 +33,6 @@ import com.google.gson.reflect.TypeToken;
 
 import me.onebone.economyapi.EconomyAPI;
 import me.onebone.economyland.EconomyLand;
-import me.onebone.economyland.Land;
 import me.onebone.economyland.error.LandCountMaximumException;
 import me.onebone.economyland.error.LandOverlapException;
 import me.onebone.economyproperty.provider.*;
