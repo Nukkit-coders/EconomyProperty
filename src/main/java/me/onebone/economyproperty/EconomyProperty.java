@@ -33,6 +33,7 @@ import com.google.gson.reflect.TypeToken;
 
 import me.onebone.economyapi.EconomyAPI;
 import me.onebone.economyland.EconomyLand;
+import me.onebone.economyland.Land;
 import me.onebone.economyland.error.LandCountMaximumException;
 import me.onebone.economyland.error.LandOverlapException;
 import me.onebone.economyproperty.provider.*;
@@ -51,6 +52,7 @@ import cn.nukkit.event.player.PlayerQuitEvent;
 import cn.nukkit.item.Item;
 import cn.nukkit.level.Position;
 import cn.nukkit.math.Vector2;
+import cn.nukkit.math.Vector3;
 import cn.nukkit.network.protocol.UpdateBlockPacket;
 import cn.nukkit.network.protocol.UpdateBlockPacket.Entry;
 import cn.nukkit.plugin.PluginBase;
@@ -284,6 +286,42 @@ public class EconomyProperty extends PluginBase implements Listener{
 				int id = this.provider.addProperty(new Vector2(pos[0].x, pos[0].z), new Vector2(pos[1].x, pos[1].z), pos[0].level, price);
 				
 				sender.sendMessage(this.getMessage("property-created", new Object[]{id}));
+			}else if(args[0].equals("move")){
+				if(!(sender instanceof Player)){
+					sender.sendMessage(new TranslationContainer("commands.generic.ingame"));
+					return true;
+				}
+				
+				Player player = (Player) sender;
+				if(!player.hasPermission("economyproperty.command.property.move")){
+					player.sendMessage(new TranslationContainer(TextFormat.RED + "%commands.generic.permission"));
+					return true;
+				}
+				
+				if(args.length < 2){
+					sender.sendMessage(TextFormat.RED + "Usage: " + command.getUsage());
+					return true;
+				}
+				
+				int id;
+				try{
+					id = Integer.parseInt(args[1]);
+				}catch(NumberFormatException e){
+					sender.sendMessage(this.getMessage("provide-number-id", new Object[]{args[1]}));
+					return true;
+				}
+				
+				Property property = this.provider.getProperty(id);
+				if(property == null){
+					sender.sendMessage(this.getMessage("property-not-exist", new Object[]{id}));
+					return true;
+				}
+				
+				Vector2 start = property.getStart();
+				Vector2 end = property.getEnd();
+				
+				Vector3 center = new Vector3((start.x + end.x) / 2, 128, (start.y + end.y) / 2);
+				player.teleport(player.level.getSafeSpawn(center));
 			}else if(args[0].equals("create")){
 				if(!(sender instanceof Player)){
 					sender.sendMessage(new TranslationContainer("commands.generic.ingame"));

@@ -9,9 +9,9 @@ depend:
 
 commands:
   property:
-    usage: /property <create|pos1|pos2|make|list|here|remove>
+    usage: /property <create|pos1|pos2|make|move|list|here|remove>
     description: Property management command
-    permission: economyproperty.command.property;economyproperty.command.property.pos1;economyproperty.command.property.pos2;economyproperty.command.property.make;economyproperty.command.property.create;economyproperty.command.property.list;economyproperty.command.property.remove;economyproperty.command.property.buy;economyproperty.command.property.here;
+    permission: economyproperty.command.property;economyproperty.command.property.pos1;economyproperty.command.property.pos2;economyproperty.command.property.make;economyproperty.command.property.create;economyproperty.command.property.list;economyproperty.command.property.remove;economyproperty.command.property.buy;economyproperty.command.property.here;economyproperty.command.property.move;
 permissions:
   economyproperty:
     description: Includes all permissions of EconomyProperty
@@ -30,6 +30,9 @@ permissions:
                 description: Allows player to use /property pos2
               economyproperty.command.property.make:
                 description: Allows player to use /property make
+              economyproperty.command.property.move:
+                description: Allows player to use /property move
+                default: true
               economyproperty.command.property.list:
                 description: Allows player to use /property list
               economyproperty.command.property.remove:
