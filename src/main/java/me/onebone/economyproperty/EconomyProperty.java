@@ -355,7 +355,7 @@ public class EconomyProperty extends PluginBase implements Listener{
 						return true;
 					}
 					
-					this.creationMode.put(player, new Object[]{x, z, price, null});
+					this.creationMode.put(player, new Object[]{x - 1, z - 1, price, null});
 					
 					sender.sendMessage(this.getMessage("enter-creation-mode"));
 				}
