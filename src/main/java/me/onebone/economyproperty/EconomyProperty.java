@@ -382,11 +382,10 @@ public class EconomyProperty extends PluginBase implements Listener{
 							return true;
 						}
 						
-						this.api.reduceMoney(player, property.getPrice(), true);
 						this.land.addLand(start, end, player.level, player.getName());
-						
 						this.provider.removeProperty(property.getId());
-						
+						this.api.reduceMoney(player, property.getPrice(), true);
+
 						player.sendMessage(this.getMessage("bought-property", new Object[]{property.getId()}));
 					}catch(LandOverlapException e){
 						player.sendMessage(this.getMessage("land-overlap", new Object[]{e.overlappingWith().getId()}));
