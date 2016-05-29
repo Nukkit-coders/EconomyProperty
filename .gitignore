@@ -1,1 +1,6 @@
+.classpath
+.project
+.settings
+*.bat
 target
+*.html
