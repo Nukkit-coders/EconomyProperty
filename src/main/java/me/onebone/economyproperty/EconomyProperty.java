@@ -170,6 +170,8 @@ public class EconomyProperty extends PluginBase implements Listener{
 		this.manager = new PlayerManager();
 		
 		this.getServer().getScheduler().scheduleDelayedRepeatingTask(new ShowBlockTask(this), 20, 20);
+		int interval = this.getConfig().getInt("auto-save", 300) * 1200;
+		this.getServer().getScheduler().scheduleDelayedRepeatingTask(new AutoSaveTask(this), interval, interval);
 		this.getServer().getPluginManager().registerEvents(this, this);
 	}
 	
@@ -733,5 +735,9 @@ public class EconomyProperty extends PluginBase implements Listener{
 				}
 			}
 		}
+	}
+	
+	public void save(){
+		this.provider.save();
 	}
 }
