@@ -35,6 +35,7 @@ import me.onebone.economyapi.EconomyAPI;
 import me.onebone.economyland.EconomyLand;
 import me.onebone.economyland.error.LandCountMaximumException;
 import me.onebone.economyland.error.LandOverlapException;
+import me.onebone.economyproperty.error.PropertyOverlapException;
 import me.onebone.economyproperty.provider.*;
 import cn.nukkit.Player;
 import cn.nukkit.block.Block;
@@ -72,6 +73,14 @@ public class EconomyProperty extends PluginBase implements Listener{
 	private PlayerManager manager;
 	
 	private Map<String, String> lang;
+	
+	public int addProperty(Position start, Position end, int price) throws PropertyOverlapException{
+		Property property;
+		if((property = this.provider.checkOverlap(start, end)) != null){
+			throw new PropertyOverlapException(property.getId());
+		}
+		return this.provider.addProperty(new Vector2(start.x, start.z), new Vector2(end.x, end.z), start.level, price);
+	}
 	
 	public String getMessage(String key){
 		return this.getMessage(key, new String[]{});
