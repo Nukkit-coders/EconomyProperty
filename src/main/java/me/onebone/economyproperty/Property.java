@@ -33,7 +33,7 @@ public class Property{
 	private String levelName;
 	private double price;
 	
-	private List<Position> transaction;
+	private List<Position> transaction; // TODO
 	
 	public Property(int id, Vector2 start, Vector2 end, Level level, String levelName, double price){
 		this(id, start, end, level, levelName, price, new ArrayList<Position>());
@@ -45,20 +45,21 @@ public class Property{
 		start = start.floor();
 		end = end.floor();
 		
+		double startX = start.x, endX = end.x;
+		double startZ = start.y, endZ = end.y;
+		
 		if(start.x > end.x){
-			double tmp = start.x;
-			start.x = end.x;
-			end.x = tmp;
+			startX = end.x;
+			endX = start.x;
 		}
 		
 		if(start.y > end.y){
-			double tmp = start.y;
-			start.y = end.y;
-			end.y = tmp;
+			startZ = end.y;
+			endZ = start.y;
 		}
 		
-		this.start = start;
-		this.end = end;
+		this.start = new Vector2(startX, startZ);
+		this.end = new Vector2(endX, endZ);
 		this.level = level;
 		this.levelName = levelName;
 		
