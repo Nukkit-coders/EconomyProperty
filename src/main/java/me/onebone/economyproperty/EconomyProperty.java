@@ -680,8 +680,15 @@ public class EconomyProperty extends PluginBase implements Listener{
 					UpdateBlockPacket.FLAG_ALL);
 		}
 		
-		pk.records = entries;
-		player.dataPacket(pk);
+		//pk.records = entries;
+		for(int i = 0; i < entries.length; i++){
+			pk.x = entries[i].x;
+			pk.y = entries[i].y;
+			pk.z = entries[i].z;
+			pk.blockId = entries[i].blockId;
+			pk.blockData = entries[i].blockData;
+			player.dataPacket(pk);
+		}
 	}
 	
 	public void removeBlocks(Player player, boolean removePosition){
@@ -725,11 +732,18 @@ public class EconomyProperty extends PluginBase implements Listener{
 								show ? Block.GLASS : player.level.getBlockIdAt((int) pos2.x, (int) pos2.y, (int) pos1.z),
 										player.level.getBlockDataAt((int) pos2.x, (int) pos2.y, (int) pos1.z), UpdateBlockPacket.FLAG_ALL);
 					}
-					pk.records = entries;
+					//pk.records = entries;
 				}
 				
-				player.dataPacket(pk);
-				
+				for(int i = 0; i < entries.length; i++){
+					pk.x = entries[i].x;
+					pk.y = entries[i].y;
+					pk.z = entries[i].z;
+					pk.blockId = entries[i].blockId;
+					pk.blockData = entries[i].blockData;
+					player.dataPacket(pk);
+				}
+							
 				if(show){
 					Position[] shown = new Position[entries.length];
 					
