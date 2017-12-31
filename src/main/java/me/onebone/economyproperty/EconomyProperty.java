@@ -554,7 +554,7 @@ public class EconomyProperty extends PluginBase implements Listener{
 			return;
 		}
 		
-		if(item.canBePlaced() && !block.canBeActivated() && event.getAction() == PlayerInteractEvent.RIGHT_CLICK_BLOCK){ // placing
+		if(item.canBePlaced() && !block.canBeActivated() && event.getAction() == PlayerInteractEvent.Action.RIGHT_CLICK_BLOCK){ // placing
 			block = block.getSide(event.getFace());
 		}
 		
@@ -580,7 +580,7 @@ public class EconomyProperty extends PluginBase implements Listener{
 						player.sendMessage(this.getMessage("land-maximum"));
 					}
 				}
-				if(event.getAction() != PlayerInteractEvent.RIGHT_CLICK_BLOCK){
+				if(event.getAction() != PlayerInteractEvent.Action.RIGHT_CLICK_BLOCK){
 					event.setCancelled();
 				}
 			}
@@ -592,7 +592,7 @@ public class EconomyProperty extends PluginBase implements Listener{
 					event.setCancelled();
 					
 					// RIGHT_CLICK_BLOCK
-					if(event.getAction() == PlayerInteractEvent.RIGHT_CLICK_BLOCK && !block.canBeActivated() && event.getItem().canBePlaced()){
+					if(event.getAction() == PlayerInteractEvent.Action.RIGHT_CLICK_BLOCK && !block.canBeActivated() && event.getItem().canBePlaced()){
 						this.placeQueue.add(player);
 					}
 				}
